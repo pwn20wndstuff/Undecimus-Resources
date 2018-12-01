@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+if [[ ! -x "/usr/bin/debugserver" && -x "/Developer/usr/bin/debugserver" ]]; then
+    cp /Developer/usr/bin/debugserver /private/var/tmp/debugserver
+    ldid -Hsha256 -S/usr/share/entitlements/debugserver.plist /private/var/tmp/debugserver
+    mv /private/var/tmp/debugserver /usr/bin
+fi
+if [[ -x "/usr/bin/debugserver" ]]; then
+    exec /usr/bin/debugserver "$@"
+else
+    echo "Please mount developer disk image"
+fi
