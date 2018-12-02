@@ -6,7 +6,6 @@
 	<string>/Library/MobileSubstrate/ServerPlugins/Unrestrict.dylib</string>
 	<string>/bin/launchctl</string>
 	<string>/usr/lib/libjailbreak.dylib</string>
-	<string>/jb/libjailbreak.dylib</string>
 	<string>/usr/lib/pspawn_hook.dylib</string>
 	<string>/usr/libexec/jailbreakd</string>
 </array>
