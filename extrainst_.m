@@ -23,7 +23,7 @@ int main(int argc, char **argv, char **envp) {
     int rv;
 
     if (argc >= 2 && strcmp(argv[1], "upgrade") == 0) {
-        rv = system([[NSString stringWithFormat:@"/usr/bin/dpkg --compare-versions \"%s\" lt \"%s\"", argv[2], "0.8"] UTF8String]);
+        rv = system([[NSString stringWithFormat:@"/usr/bin/dpkg --compare-versions \"%s\" lt \"%s\"", argv[2], "0.9"] UTF8String]);
         if (WEXITSTATUS(rv) == 0) {
             finish("reboot");
             return 0;
