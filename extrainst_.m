@@ -42,19 +42,24 @@ int main(int argc, char **argv, char **envp) {
         if (access(path, F_OK) == ERR_SUCCESS) {
             args[i++] = path;
         } else {
-            fprintf(stderr, "Resource to inject: \"%s\" does not exist", path);
+            fprintf(stderr, "Resource to inject: \"%s\" does not exist\n", path);
         }
     }
     args[i] = NULL;
     pid_t child;
     if (posix_spawn(&child, "/usr/bin/inject", NULL, NULL, args, envp) != 0) {
-        fprintf(stderr, "unable to spawn /usr/bin/inject");
-        return 1;
+        fprintf(stderr, "unable to spawn /usr/bin/inject: reboot\n");
+        finish("reboot");
+        return 0;
     }
     int stat;
     waitpid(child, &stat, 0);
     rv = system("/bin/launchctl stop jailbreakd");
-    return WEXITSTATUS(rv);
+    if (WEXITSTATUS(rv) != 0) {
+        fprintf(stderr, "unable to restart jailbreakd: reboot\n");
+        finish("reboot");
+    }
+    return 0;
 }
 
 // vim:ft=objc
