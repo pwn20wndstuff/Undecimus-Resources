@@ -1,5 +1,5 @@
 Package: science.xnu.undecimus.resources
-Version: 0.10
+Version: 0.11
 Architecture: iphoneos-arm
 Description: Resources used by Unc0ver
 Maintainer: Sam Bingner <maintainer@sbdhi.com>
