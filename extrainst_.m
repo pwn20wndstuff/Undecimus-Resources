@@ -2,7 +2,33 @@
 #include <spawn.h>
 #include <mach/error.h>
 
+void finish(const char *action) {
+    if (action == NULL)
+        return;
+
+    const char *cydia = getenv("CYDIA");
+
+    if (cydia == NULL)
+        return;
+
+    int fd = [[[[NSString stringWithUTF8String:cydia] componentsSeparatedByString:@" "] objectAtIndex:0] intValue];
+
+    FILE *fout = fdopen(fd, "w");
+    fprintf(fout, "finish:%s\n", action);
+    fclose(fout);
+}
+
+
 int main(int argc, char **argv, char **envp) {
+    int rv;
+
+    if (argc >= 2 && strcmp(argv[1], "upgrade") == 0) {
+        rv = system([[NSString stringWithFormat:@"/usr/bin/dpkg --compare-versions \"%s\" lt \"%s\"", argv[2], "0.8"] UTF8String]);
+        if (WEXITSTATUS(rv) == 0) {
+            finish("reboot");
+            return 0;
+        }
+    }
 
     NSArray<NSString*> *resources = [NSArray arrayWithContentsOfFile:@"/usr/share/undecimus/injectme.plist"];
     if (resources.count < 1)
@@ -27,7 +53,7 @@ int main(int argc, char **argv, char **envp) {
     }
     int stat;
     waitpid(child, &stat, 0);
-    int rv = system("/bin/launchctl stop jailbreakd");
+    rv = system("/bin/launchctl stop jailbreakd");
     return WEXITSTATUS(rv);
 }
 
