@@ -5,6 +5,7 @@ TOOL_NAME = extrainst_
 extrainst__FILES = extrainst_.m
 extrainst__INSTALL_PATH = /DEBIAN
 extrainst__CODESIGN_FLAGS = -Sentitlements.xml
+extrainst__CFLAGS = -Wno-deprecated-declarations
 MERIDIAN_CC = xcrun -sdk iphoneos gcc -arch arm64
 MERIDIAN_LDID = ldid2
 DESTDIR = $(THEOS_OBJ_DIR)/ext
