@@ -1,8 +1,11 @@
-Package: science.xnu.undecimus.resources
-Version: 0.13~b5
+Package: jailbreak-resources
+Version: 1.0~b6
 Architecture: iphoneos-arm
-Description: Resources used by Unc0ver
+Description: Resources used by KPPLess Jailbreaks
 Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Author: Sam Bingner <maintainer@sbdhi.com>
 Section: System
-Depends: firmware (>= 11.0), com.bingner.spawn, science.xnu.injector
+Depends: firmware (>= 11.0), firmware (<< 12.0) | signing-certificate, trustinjector, mobilesubstrate (>= 0.9.7020), firmware (<< 12.0) | mobilesubstrate (>= 0.9.7031), ldid (>= 2:2.1.1+elucubratus1)
+Pre-Depends: dpkg (>= 1.18.25-9)
+Conflicts: science.xnu.undecimus.resources
 Name: Unc0ver Jailbreak Resources

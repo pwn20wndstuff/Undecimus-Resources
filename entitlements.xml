@@ -4,5 +4,9 @@
 <dict>
 	<key>platform-application</key>
 	<true/>
+	<key>com.apple.private.skip-library-validation</key>
+	<true/>
+	<key>com.apple.private.container-required</key>
+	<false/>
 </dict>
 </plist>
