@@ -13,7 +13,7 @@ fi
 
 if [[ ! -x "/usr/bin/debugserver" && -x "/Developer/usr/bin/debugserver" ]]; then
     cp /Developer/usr/bin/debugserver /private/var/tmp/debugserver
-    ldid -Hsha256 -S/usr/share/entitlements/debugserver.xml /private/var/tmp/debugserver
+    ldid -S/usr/share/entitlements/debugserver.xml /private/var/tmp/debugserver
     mv /private/var/tmp/debugserver /usr/bin
 fi
 if [[ -x "/usr/bin/debugserver" ]]; then
